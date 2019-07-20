@@ -49,9 +49,13 @@ CampaignStack.path = '';
 const DonatedStack = createStackNavigator(
   {
     Donated: DonatedScreen,
-  },
-  config
-);
+  },{
+        headerMode: 'none',
+        navigationOptions: {
+            headerVisible: false,
+        }
+    },
+ );
 
 DonatedStack.navigationOptions = {
   tabBarLabel: 'Donated',
@@ -66,7 +70,7 @@ const ProductsStack = createStackNavigator(
   {
     Products: ProductsScreen,
   },
-  config
+
 );
 
 ProductsStack.navigationOptions = {
