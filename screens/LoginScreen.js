@@ -11,7 +11,80 @@ import {
     Button
 } from 'react-native';
 
+// import Route from "./Route";
+import HomeScreen from './HomeScreen';
+import SettingsScreen from './SettingsScreen';
+import LinksScreen from './LinksScreen';
 import {responsiveHeight, responsiveFontSize, responsiveWidth} from "react-native-responsive-dimensions";
+
+import {createStackNavigator, createBottomTabNavigator} from "react-navigation";
+
+
+const HomeStack = createStackNavigator(
+  {
+    Home: HomeScreen,
+  },
+  // config
+);
+
+HomeStack.navigationOptions = {
+  tabBarLabel: 'Home',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
+  ),
+};
+
+HomeStack.path = '';
+
+const LinksStack = createStackNavigator(
+  {
+    Links: LinksScreen,
+  },
+  // config
+);
+
+LinksStack.navigationOptions = {
+  tabBarLabel: 'Links',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+  ),
+};
+
+LinksStack.path = '';
+
+const SettingsStack = createStackNavigator(
+  {
+    Settings: SettingsScreen,
+  },
+  // config
+);
+
+SettingsStack.navigationOptions = {
+  tabBarLabel: 'Settings',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+  ),
+};
+
+SettingsStack.path = '';
+
+
+
+const tabNavigator = createBottomTabNavigator({
+    HomeScreen,
+    LinksScreen,
+    SettingsScreen,
+});
+
+// tabNavigator.path = '';
+
 
 
 
@@ -64,7 +137,7 @@ export default class LoginScreen extends React.Component {
                 <Button
                     title={'Login'}
                     style={styles.inputButton}
-                    // onPress={}
+                    onPress={()=> this.props.navigation.navigate('Home')}
                 />
             </View>
 
