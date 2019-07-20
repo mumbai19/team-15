@@ -21,3 +21,4 @@ class Product(models.Model):
      quantity = models.IntegerField()
      price = models.IntegerField()
      category = models.CharField(max_length=100)
+
