@@ -1,5 +1,5 @@
 
-{% extends 'music/base_visitor.html' %}
+{% extends 'web/base_visitor.html' %}
 {% block title %}Register{% endblock %}
 {% block register_active %}active{% endblock %}
 
@@ -14,7 +14,7 @@
                     {% if error_message %}
                         <p><strong>{{ error_message }}</strong></p>
                     {% endif %}
-                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                    <form action="{% url 'web:register' %}" class="form-horizontal" method="post">
                         {% csrf_token %}
                         {% include 'web/form_template.html' %}
                         <div class="form-group">
@@ -25,7 +25,7 @@
                     </form>
                 </div>
                 <div class="panel-footer">
-                    Already have an account? <a href="{% url 'music:login_user' %}">Click here</a> to log in.
+                    Already have an account? <a href="{% url 'web:login' %}">Click here</a> to log in.
                 </div>
             </div>
         </div>
