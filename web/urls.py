@@ -9,6 +9,8 @@ urlpatterns = [
 
 	path('register/', views.RegisterFormView.as_view(), name='register'),
 	path('login/', views.LoginFormView.as_view(), name='login'),
-	path('logout/', views.logoutForm, name='logout')	
+	path('logout/', views.logoutForm, name='logout'),
+
+	path('addToCart/', views.addToCart, name="addToCart")	
 
 ]
