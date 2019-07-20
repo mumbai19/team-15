@@ -3,9 +3,9 @@ from django.views.generic import View
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-from django.views.generic.edit import CreateView,UpdateView,DeleteView
-from django.core.urlresolvers import reverse_lazy
-from .forms import UserForm
+from .forms import RegisterForm
+from .models import Product,Bill
+from django.models import Q
 
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
@@ -17,7 +17,12 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'web/index.html')
+                if user.is_staff:
+                    return render(request, 'web/seller_index.html')
+                elif user.is_superuser:
+                    return render(request,'web/admin_index.html')
+                else:
+                    return render(request,'web/cust_index.html')
             else:
                 return render(request, 'web/login.html', {'error_message': 'Your account has been disabled'})
         else:
@@ -48,3 +53,15 @@ def logout_user(request):
         "form": form,
     }
     return render(request, 'web/login.html', context)
+
+def product_view(request, product_id):
+    product = Product.objects.get(pk=product_id)
+    return render(request, 'web/product.html', {'product': product})
+
+def confirmation(request):
+    product = Bill.objects.get(User_id=request.user)
+    return render(request, 'web/confirmation.html', {'bill': product})
+
+
+
+
