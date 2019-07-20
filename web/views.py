@@ -3,11 +3,10 @@ from django.views.generic import View
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-from django.views.generic.edit import CreateView,UpdateView,DeleteView
-from django.core.urlresolvers import reverse_lazy
-from django.http import HttpResponse
 
-from .models import  Product,Order,Cart
+from .models import  Product,Order,Cart,Bill
+#from django.models import Q
+from django.http import HttpResponse
 
 from .forms import LoginForm, RegisterForm
 
@@ -132,15 +131,26 @@ class LoginFormView(View):
 				return redirect('/login?login_error=failed')
 		
 
+def product_view(request, product_id):
+    product = Product.objects.get(pk=product_id)
+    return render(request, 'web/product.html', {'product': product})
 
-from django.contrib.auth import logout
+def confirmation(request):
+    product = Bill.objects.get(User_id=request.user)
+    return render(request, 'web/confirmation.html', {'bill': product})
+
+
+def cust_index(request):
+    # products = Product.objects.exclude('quantity' =0 )
+    # top_products= Order.objects.values('product_id').annotate(c_p= Sum('product_id').order_by('-c_p'))
+    # return render(request,'cust_index.html',{'products':product,'top_products':top_products})
+    pass
 
 def logoutForm(request):
 	logout(request)
 	print("logout called, user logged out")
 	# Redirect to a success page.
 	return redirect('web:index')
-
 
 def addToCart(request):
 	if request.user.is_authenticated:
@@ -157,5 +167,5 @@ def addToCart(request):
 				cart = Cart.objects.get(User_id=user)
 				#cart present
 				cart.Order_id += ','+request.GET.get('id')
-		pass:
+		except:
 			cart = Cart.objects.create(User_id=user,Order_id=request.GET.get('id'))
