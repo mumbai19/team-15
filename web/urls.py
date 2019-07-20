@@ -11,5 +11,4 @@ urlpatterns = [
 	path('login/', views.LoginFormView.as_view(), name='login'),
 	path('logout/', views.logoutForm, name='logout'),
 	path('addToCart/', views.addToCart, name="addToCart")	
-
 ]
