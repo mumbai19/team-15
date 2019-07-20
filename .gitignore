@@ -3,6 +3,7 @@
 static
 pgs/static/images
 pgs/static/Preset
-pgs/migrations/0*.py
+pgs/migrations/*.py
+settings.py
 *.pyc
 navtext
