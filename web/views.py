@@ -5,8 +5,6 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from .forms import RegisterForm
 from .models import Product,Bill,Order
-from django.models import Q
-from .forms import UserForm
 from django.http import HttpResponse
 from .forms import LoginForm, RegisterForm
 
@@ -141,9 +139,9 @@ def confirmation(request):
 
 
 def cust_index(request):
-    products = Product.objects.exclude('quantity' =0 )
-    top_products= Order.objects.values('product_id').annotate(c_p= Sum('product_id').order_by('-c_p'))
-    return render(request,'cust_index.html',{'products':product,'top_products':top_products})
+    # products = Product.objects.all()
+    # top_products= Order.objects.values('product_id').annotate(c_p= Sum('product_id').order_by('-c_p'))
+    return render(request,'web/cust_index.html')
     
 def logoutForm(request):
 	logout(request)
