@@ -3,6 +3,10 @@
 static
 pgs/static/images
 pgs/static/Preset
-pgs/migrations/0*.py
+pgs/migrations/*.py
+settings.py
+*.cpython-36.pyc
 *.pyc
+*/__pycache__/
+/trishul/__pycache__/
 navtext
