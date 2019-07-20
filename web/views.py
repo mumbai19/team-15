@@ -6,6 +6,10 @@ from django.contrib.auth import logout
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.core.urlresolvers import reverse_lazy
 from .forms import UserForm
+from django.http import HttpResponse
+
+from .models import  Product,Order
+
 
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
@@ -48,3 +52,10 @@ def logout_user(request):
         "form": form,
     }
     return render(request, 'web/login.html', context)
+
+
+def cust_index(request):
+    products = Product.objects.exclude('quantity' =0 )
+    top_products= Order.objects.values('product_id').annotate(c_p= Sum('product_id').order_by('-c_p'))
+    return render(request,'cust_index.html',{'products':product,'top_products':top_products})
+    
