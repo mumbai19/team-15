@@ -3,14 +3,17 @@ from django.views.generic import View
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-from .forms import RegisterForm
-from .models import Product,Bill,Order
+
+from .models import  Product,Order,Cart,Bill
+#from django.models import Q
 from django.http import HttpResponse
+
 from .forms import LoginForm, RegisterForm
 
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+
 def index(request):
 	return JsonResponse({'hello':"world"})
 
@@ -137,15 +140,39 @@ def confirmation(request):
     return render(request, 'web/confirmation.html', {'bill': product})
 
 
-
 def cust_index(request):
+<<<<<<< HEAD
     # products = Product.objects.all()
     # top_products= Order.objects.values('product_id').annotate(c_p= Sum('product_id').order_by('-c_p'))
     return render(request,'web/cust_index.html')
     
+=======
+    # products = Product.objects.exclude('quantity' =0 )
+    # top_products= Order.objects.values('product_id').annotate(c_p= Sum('product_id').order_by('-c_p'))
+    # return render(request,'cust_index.html',{'products':product,'top_products':top_products})
+    pass
+
+>>>>>>> a89785af4a8e4ac3c0749386400935f73ecbaf39
 def logoutForm(request):
 	logout(request)
 	print("logout called, user logged out")
 	# Redirect to a success page.
 	return redirect('web:index')
 
+def addToCart(request):
+	if request.user.is_authenticated:
+		uid = ''
+		try:
+			uid = request.user.id
+		except:
+			pass
+		user = ''
+		cart = ''
+		try:
+			if uid:
+				user = User.objects.get(pk=uid)
+				cart = Cart.objects.get(User_id=user)
+				#cart present
+				cart.Order_id += ','+request.GET.get('id')
+		except:
+			cart = Cart.objects.create(User_id=user,Order_id=request.GET.get('id'))
