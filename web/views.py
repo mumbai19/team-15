@@ -3,16 +3,17 @@ from django.views.generic import View
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-from .forms import RegisterForm
-from .models import Product,Bill,Order
-from django.models import Q
-from .forms import UserForm
+
+from .models import  Product,Order,Cart,Bill
+#from django.models import Q
 from django.http import HttpResponse
+
 from .forms import LoginForm, RegisterForm
 
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+
 def index(request):
 	return JsonResponse({'hello':"world"})
 
@@ -142,11 +143,9 @@ def confirmation(request):
     return render(request, 'web/confirmation.html', {'bill': product})
 
 
-
 def cust_index(request):
     products = Product.objects.all()
-    top_products= Order.objects.values('product_id').annotate(c_p= Sum('product_id').order_by('c_p'))
-    return render(request,'cust_index.html',{'products':product})
+    return render(request,{'products':products})
 
 def top_products(request):
     top_products= Order.objects.values('product_id').annotate(c_p= Sum('product_id').order_by('c_p'))
@@ -172,3 +171,22 @@ def search(request):
                 Q(price__icontains=query)
             ).distinct()
             return render(request, 'web/product/'+product.id)
+
+def addToCart(request):
+	if request.user.is_authenticated:
+		uid = ''
+		try:
+			uid = request.user.id
+		except:
+			pass
+		user = ''
+		cart = ''
+		try:
+			if uid:
+				user = User.objects.get(pk=uid)
+				cart = Cart.objects.get(User_id=user)
+				#cart present
+				cart.Order_id += ','+request.GET.get('id')
+		except:
+			cart = Cart.objects.create(User_id=user,Order_id=request.GET.get('id'))
+
