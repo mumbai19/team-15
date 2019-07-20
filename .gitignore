@@ -4,7 +4,6 @@ static
 pgs/static/images
 pgs/static/Preset
 pgs/migrations/*.py
-settings.py
 *.cpython-36.pyc
 *.pyc
 */__pycache__/
