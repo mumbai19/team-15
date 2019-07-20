@@ -116,9 +116,12 @@ class LoginFormView(View):
 		if user is not None:
 			if user.is_active:
 				login(request, user)
-				# return redirect('pgs:index')
-				print('REdirect check for login')
-				return redirect('web:index')
+                if user.is_staff:
+                    return render('web/seller_index.html')
+                elif user.is_superuser:
+                    return render('web/admin_index.html')
+                else:
+				    return redirect('web/cust_index.html')
 			else:
 				print('The user acccount is disabled')
 				return redirect('/login?login_error=disabled')
@@ -141,13 +144,31 @@ def confirmation(request):
 
 
 def cust_index(request):
-    products = Product.objects.exclude('quantity' =0 )
-    top_products= Order.objects.values('product_id').annotate(c_p= Sum('product_id').order_by('-c_p'))
-    return render(request,'cust_index.html',{'products':product,'top_products':top_products})
-    
+    products = Product.objects.all()
+    top_products= Order.objects.values('product_id').annotate(c_p= Sum('product_id').order_by('c_p'))
+    return render(request,'cust_index.html',{'products':product})
+
+def top_products(request):
+    top_products= Order.objects.values('product_id').annotate(c_p= Sum('product_id').order_by('c_p'))
+    return render(request,{'top_products':top_products})
+
 def logoutForm(request):
 	logout(request)
 	print("logout called, user logged out")
 	# Redirect to a success page.
 	return redirect('web:index')
 
+def main_page(request):
+    return render('web/main_page.html')
+
+def products(request):
+    return render('web/cust_index.html')
+
+def search(request):
+    query = request.GET.get("q")
+        if query:
+            product = Product.filter(
+                Q(name__icontains=query) |
+                Q(price__icontains=query)
+            ).distinct()
+            return render(request, 'web/product/'+product.id)
