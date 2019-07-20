@@ -1,10 +1,13 @@
 from django.views import generic
 from django.views.generic import View
 from django.shortcuts import render,redirect
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.core.urlresolvers import reverse_lazy
 from .forms import UserForm
+
+IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
 def login_user(request):
     if request.method == "POST":
@@ -38,3 +41,10 @@ def register(request):
     context = {
         "form": form,
     }
+def logout_user(request):
+    logout(request)
+    form = UserForm(request.POST or None)
+    context = {
+        "form": form,
+    }
+    return render(request, 'web/login.html', context)

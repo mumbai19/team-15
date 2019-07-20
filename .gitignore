@@ -8,5 +8,6 @@ settings.py
 *.cpython-36.pyc
 *.pyc
 */__pycache__/
+/trishul/settings.py
 /trishul/__pycache__/
 navtext
