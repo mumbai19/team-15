@@ -3,18 +3,13 @@ from django.views.generic import View
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-from django.views.generic.edit import CreateView,UpdateView,DeleteView
-<<<<<<< HEAD
-from django.core.urlresolvers import reverse_lazy
+from .forms import RegisterForm
+from .models import Product,Bill,Order
+from django.models import Q
 from .forms import UserForm
 from django.http import HttpResponse
-
-from .models import  Product,Order
-
-
-=======
 from .forms import LoginForm, RegisterForm
->>>>>>> 20cb2590fa1c9b14eb106eb068e3d774a04a2bd3
+
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 from django.http import JsonResponse
 from django.contrib.auth.models import User
@@ -135,49 +130,14 @@ class LoginFormView(View):
 				return redirect('/login?login_error=failed')
 		
 
+def product_view(request, product_id):
+    product = Product.objects.get(pk=product_id)
+    return render(request, 'web/product.html', {'product': product})
 
-from django.contrib.auth import logout
+def confirmation(request):
+    product = Bill.objects.get(User_id=request.user)
+    return render(request, 'web/confirmation.html', {'bill': product})
 
-<<<<<<< HEAD
-def login_user(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return render(request, 'web/index.html')
-            else:
-                return render(request, 'web/login.html', {'error_message': 'Your account has been disabled'})
-        else:
-            return render(request, 'web/login.html', {'error_message': 'Invalid login'})
-    return render(request, 'web/login.html')
-
-
-def register(request):
-    form = UserForm(request.POST or None)
-    if form.is_valid():
-        user = form.save(commit=False)
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        user.set_password(password)
-        user.save()
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return render(request, 'web/index.html')
-    context = {
-        "form": form,
-    }
-def logout_user(request):
-    logout(request)
-    form = UserForm(request.POST or None)
-    context = {
-        "form": form,
-    }
-    return render(request, 'web/login.html', context)
 
 
 def cust_index(request):
@@ -185,10 +145,9 @@ def cust_index(request):
     top_products= Order.objects.values('product_id').annotate(c_p= Sum('product_id').order_by('-c_p'))
     return render(request,'cust_index.html',{'products':product,'top_products':top_products})
     
-=======
 def logoutForm(request):
 	logout(request)
 	print("logout called, user logged out")
 	# Redirect to a success page.
 	return redirect('web:index')
->>>>>>> 20cb2590fa1c9b14eb106eb068e3d774a04a2bd3
+
