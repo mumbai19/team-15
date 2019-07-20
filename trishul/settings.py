@@ -25,8 +25,11 @@ SECRET_KEY = '4#s%$5ym)8-!09cpqb%)4d569i1_8zsai^p$a85ukvp1536uts'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    'www.localhost',
+    '127.0.0.1',
+    '*'
+]
 
 # Application definition
 
@@ -75,9 +78,14 @@ WSGI_APPLICATION = 'trishul.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'trishul',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
+
 }
 
 
