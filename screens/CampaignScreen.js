@@ -11,7 +11,8 @@ import {
     View,
 } from 'react-native';
 import {responsiveFontSize, responsiveHeight, responsiveWidth} from "react-native-responsive-dimensions";
-import CampaignDetails from "./CampaignDetails";
+// import CampaignDetails from "./CampaignDetails";
+import CampaignDonateScreen from "./CampaignDonateScreen";
 
 export default class CampaignScreen extends React.Component {
     constructor(props){
@@ -56,7 +57,7 @@ export default class CampaignScreen extends React.Component {
                 {/*<Text>SS</Text>*/}
                 <ScrollView horizontal={false}>
                     <TouchableOpacity title={'Phase 1'}
-                                      onPress={() => this.props.navigation.navigate('CampaignDetails')}
+                                      onPress={() => this.props.navigation.navigate('CampaignDonateScreen')}
                                       style={styles.infoContainer}>
 
                         <Image style={styles.image}
@@ -70,7 +71,7 @@ export default class CampaignScreen extends React.Component {
 
                     </TouchableOpacity>
                     <TouchableOpacity title={'Phase 1'}
-                                      onPress={() => this.props.navigation.navigate('CampaignDetails')}
+                                      onPress={() => this.props.navigation.navigate('CampaignDonateScreen')}
                                       style={styles.infoContainer}>
 
                         <Image style={styles.image}
@@ -79,7 +80,7 @@ export default class CampaignScreen extends React.Component {
 
                     </TouchableOpacity>
                     <TouchableOpacity title={'Phase 1'}
-                                      onPress={() => this.props.navigation.navigate('CampaignDetails')}
+                                      onPress={() => this.props.navigation.navigate('CampaignDonateScreen')}
                                       style={styles.infoContainer}>
 
                         <Image style={styles.image}
@@ -88,7 +89,7 @@ export default class CampaignScreen extends React.Component {
 
                     </TouchableOpacity>
                     <TouchableOpacity title={'Phase 1'}
-                                      onPress={() => this.props.navigation.navigate('CampaignDetails')}
+                                      onPress={() => this.props.navigation.navigate('CampaignDonateScreen')}
                                       style={styles.infoContainer}>
 
                         <Image style={styles.image}
@@ -97,7 +98,7 @@ export default class CampaignScreen extends React.Component {
 
                     </TouchableOpacity>
                     <TouchableOpacity title={'Phase 1'}
-                                      onPress={() => this.props.navigation.navigate('CampaignDetails')}
+                                      onPress={() => this.props.navigation.navigate('CampaignDonateScreen')}
                                       style={styles.infoContainer}>
 
                         <Image style={styles.image}
@@ -106,7 +107,7 @@ export default class CampaignScreen extends React.Component {
 
                     </TouchableOpacity>
                     <TouchableOpacity title={'Phase 1'}
-                                      onPress={() => this.props.navigation.navigate('CampaignDetails')}
+                                      onPress={() => this.props.navigation.navigate('CampaignDonateScreen')}
                                       style={styles.infoContainer}>
 
                         <Image style={styles.image}
@@ -115,7 +116,7 @@ export default class CampaignScreen extends React.Component {
 
                     </TouchableOpacity>
                     <TouchableOpacity title={'Phase 1'}
-                                      onPress={() => this.props.navigation.navigate('CampaignDetails')}
+                                      onPress={() => this.props.navigation.navigate('CampaignDonateScreen')}
                                       style={styles.infoContainer}>
 
                         <Image style={styles.image}
@@ -131,7 +132,7 @@ export default class CampaignScreen extends React.Component {
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        paddingTop: responsiveHeight(5),
+        // paddingTop: responsiveHeight(5),
         backgroundColor: '#eee'
     },
     tagLine:{

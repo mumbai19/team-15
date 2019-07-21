@@ -34,5 +34,11 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop: responsiveHeight(5),
         backgroundColor: '#eee'
-    },
+    },inputButton:{
+        borderBottomWidth: 1,
+        // borderColor: 'black',
+        marginBottom: responsiveHeight(10)
+        // marginTop: responsiveHeight(20),
+        // paddingTop: responsiveHeight(30)
+    }
 });
