@@ -11,7 +11,7 @@ import RegisterScreen from "../screens/RegisterScreen";
 
 import CampaignScreen from "../screens/CampaignScreen";
 import DonatedScreen from "../screens/DonatedScreen";
-import ProductsScreen from "../screens/ProfileScreen";
+import ProductsScreen from "../screens/ProductsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 
 const config = Platform.select({
@@ -69,7 +69,12 @@ DonatedStack.path = '';
 const ProductsStack = createStackNavigator(
   {
     Products: ProductsScreen,
-  },
+  },{
+        headerMode: 'none',
+        navigationOptions: {
+            headerVisible: false,
+        }
+    },
 
 );
 
