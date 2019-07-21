@@ -83,7 +83,7 @@ class RegisterFormView(View):
 					print("loggin user")
 					login(request, user)
 					print('REdirect check for login')
-					return redirect('web:index')
+					return redirect('web:cust_index')
 				else:
 					print('The user acccount is disabled')
 					return redirect('/login/?login=disabled')
@@ -106,31 +106,7 @@ class LoginFormView(View):
 		return render(request, self.template_name, {'cart_size' : request.session.get('cart_size', 0),'form':form, 'login_error': error })
 
 
-	def post(self, request):
-		print('received an post request for login')
-		form = self.form_class(request.POST)
-		username = request.POST['username']
-		password = request.POST['password']
-		user = authenticate(username=username, password=password)
-		useremail = User.objects.filter(email=username)
-
-		if user is not None:
-			if user.is_active:
-				login(request, user)
-				# return redirect('pgs:index')
-				print('REdirect check for login')
-				return redirect('web:index')
-			else:
-				print('The user acccount is disabled')
-				return redirect('/login?login_error=disabled')
-		else:
-			print('The username and password is wrong')
-			if useremail.count()>0:
-				return redirect('/login?login_error=incorrect')
-			else:
-				return redirect('/login?login_error=failed')
-		
-
+	
 def product_view(request, product_id):
     product = Product.objects.get(pk=product_id)
     return render(request, 'web/product.html', {'product': product})
@@ -141,23 +117,26 @@ def confirmation(request):
 
 
 def cust_index(request):
-<<<<<<< HEAD
-    # products = Product.objects.all()
-    # top_products= Order.objects.values('product_id').annotate(c_p= Sum('product_id').order_by('-c_p'))
-    return render(request,'web/cust_index.html')
-    
-=======
-    # products = Product.objects.exclude('quantity' =0 )
-    # top_products= Order.objects.values('product_id').annotate(c_p= Sum('product_id').order_by('-c_p'))
-    # return render(request,'cust_index.html',{'products':product,'top_products':top_products})
-    pass
+    products = Product.objects.all()
+    return render(request,'web/cust_index.html',{'products':products})
 
->>>>>>> a89785af4a8e4ac3c0749386400935f73ecbaf39
+def top_products(request):
+    top_products= Order.objects.values('product_id').annotate(c_p= Sum('product_id').order_by('c_p'))
+    return render(request,{'top_products':top_products})
+
 def logoutForm(request):
 	logout(request)
 	print("logout called, user logged out")
 	# Redirect to a success page.
 	return redirect('web:index')
+
+def main_page(request):
+    return render('web/main_page.html')
+
+def products(request):
+    return render('web/cust_index.html')
+
+
 
 def addToCart(request):
 	if request.user.is_authenticated:
