@@ -10,6 +10,7 @@ import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 
 import CampaignScreen from "../screens/CampaignScreen";
+import CampaignDetails from "../screens/CampaignDetails";
 import DonatedScreen from "../screens/DonatedScreen";
 import ProductsScreen from "../screens/ProductsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
@@ -21,7 +22,7 @@ const config = Platform.select({
 
 const CampaignStack = createStackNavigator(
   {
-    Campaign: CampaignScreen,
+    Campaign: CampaignDetails,
   }, {
         headerMode: 'none',
         navigationOptions: {
@@ -90,8 +91,13 @@ ProductsStack.path = '';
 const ProfileStack = createStackNavigator(
     {
         Profile: ProfileScreen,
+    },{
+        headerMode: 'none',
+        navigationOptions: {
+            headerVisible: false,
+        }
     },
-    config
+
 );
 
 ProfileStack.navigationOptions = {
