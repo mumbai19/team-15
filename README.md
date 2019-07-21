@@ -1,3 +1,3 @@
-# team-15
+# Team-15
 ## Organization: Trishul NGO
 
