@@ -131,7 +131,8 @@ export default class CampaignScreen extends React.Component {
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        marginTop: responsiveHeight(5),
+        paddingTop: responsiveHeight(5),
+        backgroundColor: '#eee'
     },
     tagLine:{
         // fontWeight: '500',
