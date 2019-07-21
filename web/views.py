@@ -137,7 +137,6 @@ def products(request):
     return render('web/cust_index.html')
 
 
-
 def addToCart(request):
 	if request.user.is_authenticated:
 		uid = ''
@@ -155,3 +154,4 @@ def addToCart(request):
 				cart.Order_id += ','+request.GET.get('id')
 		except:
 			cart = Cart.objects.create(User_id=user,Order_id=request.GET.get('id'))
+
