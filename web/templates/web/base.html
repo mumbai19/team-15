@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'music/style.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<style>
+#element1 {display:inline-block} 
+#element2 {display:inline-block; padding-top: 10px} 
+</style>
+</head>
+<body>        
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'web:main_page' %}">Trishul</a>
+        </div>
+
+        <!-- Items -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class="{% block nav1 %}{% endblock %}"><a href="{% url 'web:products' %}"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span>&nbsp; Products</a></li>
+                <li class="{% block nav2 %}{% endblock %}"><a href="{% url 'web:top_products' %}"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>&nbsp; Top Products</a></li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search" method="get" action="" id="element1">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
+                
+                    <button type="submit" class="btn btn-default">Search</button>
+                 </div>
+                </form>
+                <div class="dropdown"  id="element2">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Language
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a href="#googtrans(en|en)" data-lang="en" class="lang-es lang-select">English</a><br>
+                                <a href="#googtrans(en|hi)" data-lang="hi" class="lang-es lang-select">हिंदी(Hindi)</a><br>
+                                <a href="#googtrans(en|mr)" data-lang="mr" class="lang-es lang-select">मराठी(Marathi)</a><br>
+                                <a href="#googtrans(en|bn)" data-lang="bn" class="lang-es lang-select">বাংলা(Bangla)</a><br>
+                                <a href="#googtrans(en|kn)" data-lang="kn" class="lang-es lang-select">ಕನ್ನಡ(Kannad)</a><br>
+                                <a href="#googtrans(en|ml)" data-lang="ml" class="lang-es lang-select">മല്യാലം(Malyalam)</a><br>
+                                <a href="#googtrans(en|te)" data-lang="te" class="lang-es lang-select">തെലുങ്ക്(Telugu)</a><br>
+                                <a href="#googtrans(en|ta)" data-lang="ta" class="lang-es lang-select">தமிழ்(Tamil)</a><br>
+                                <a href="#googtrans(en|gu)" data-lang="gu" class="lang-es lang-select">ગુજરાતી(Gujarati)</a><br>
+                                <a href="#googtrans(en|pa)" data-lang="pa" class="lang-es lang-select">ਪੰਜਾਬੀ(Punjabi)</a><br>
+                                <a href="#googtrans(en|sd)" data-lang="sd" class="lang-es lang-select">سنڌي(Sindhi)</a><br>
+                                <a href="#googtrans(en|ur)" data-lang="ur" class="lang-es lang-select">اردو(Urdu)</a><br>
+                        </div>
+                      </div>
+                
+            
+           
+            
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{% url 'web:logout' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<script type="text/javascript"> 
+    function googleTranslateElementInit() { 
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element'); 
+    } 
+$('.lang-select').click(function() {
+var theLang = $(this).attr('data-lang');
+
+//alert($(this).attr('href'));
+window.location = $(this).attr('href');
+location.reload();
+});
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> 
+{% block body %}
+{% endblock %}
+</body>
+</html>
