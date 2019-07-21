@@ -1,0 +1,12 @@
+.idea
+.vscode
+static
+pgs/static/images
+pgs/static/Preset
+pgs/migrations/*.py
+*.cpython-36.pyc
+*.pyc
+*/__pycache__/
+/trishul/settings.py
+/trishul/__pycache__/
+navtext
