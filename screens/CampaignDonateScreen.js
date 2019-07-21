@@ -16,9 +16,73 @@ export default class CampaignDonateScreen extends React.Component {
     constructor(props){
         super(props),
             this.state = {
-
             }
+
     }
+
+    paymentFunction=()=>{
+        // var settings = {
+        //     "async": true,
+        //     "crossDomain": true,
+        //     "url": "https://test.instamojo.com/api/1.1/payment-requests/",
+        //     "method": "POST",
+        //     "headers": {
+        //         "X-Api-Key": "test_c82215f199bae810566b032e1a1",
+        //         "X-Auth-Token": "test_bc194ece82566cf999afb92f27c",
+        //         "Content-Type": "application/x-www-form-urlencoded",
+        //         "Cache-Control": "no-cache",
+        //         "Postman-Token": "52eb484e-38c3-4b33-b858-e5d6ef1a6914"
+        //     },
+        //     "data": {
+        //         "allow_repeated_payments": "False",
+        //         "amount": "999",
+        //         "buyer_name": "suyog",
+        //         "purpose": "Bag",
+        //         "redirect_url": "https://www.facebook.com/",
+        //         "phone": "7666196382",
+        //         "send_email": "True",
+        //         "webhook": "https://www.facebook.com/?order_id=1234",
+        //         "send_sms": "True",
+        //         "email": "jaindamnik203@gmail.com"
+        //     }
+        // }
+        //
+        // $.ajax(settings).done(function (response) {
+        //     console.log(response);
+        // });
+
+
+        //
+
+//         fetch('https://test.instamojo.com/api/1.1/payment-requests/',{
+//             method: 'POST',
+//             headers:{
+//
+//             },
+//             body: JSON.stringify({
+//                 "allow_repeated_payments": "False",
+//                 "amount": "999",
+//                 "buyer_name": "suyog",
+//                 "purpose": "Bag",
+//                 "redirect_url": "https://www.facebook.com/",
+//                 "phone": "7666196382",
+//                 "send_email": "True",
+//                 "webhook": "https://www.facebook.com/?order_id=1234",
+//                 "send_sms": "True",
+//                 "email": "jaindamnik203@gmail.com"
+//             })
+//         }).then((response)=> response.json())
+//             .then((responseJson) => {
+//
+// // Showing response message coming from server after inserting records.
+//                 Alert.alert(responseJson);
+//
+//             }).catch((error) => {
+//             console.error(error);
+//         });
+
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -33,7 +97,8 @@ export default class CampaignDonateScreen extends React.Component {
                 <Button
                     title={'Proceed to Pay'}
                     style={styles.inputButton}
-                    onPress={()=> this.props.navigation.navigate('Home')}
+                    onPress={()=> this.props.navigation.navigate('PaymentProceed')}
+                    // onPress={()=>this.paymentFunction}
                 />
             </View>
         );

@@ -13,7 +13,7 @@ import {responsiveHeight} from "react-native-responsive-dimensions";
 import {createAppContainer, createStackNavigator} from "react-navigation";
 import CampaignScreen from "./CampaignScreen";
 import CampaignDonateScreen from "./CampaignDonateScreen";
-
+import PaymentProceed from "./PaymentProceed";
 
 const CampaignStack=createStackNavigator({
     CampaignScreen:{
@@ -22,6 +22,9 @@ const CampaignStack=createStackNavigator({
     CampaignDonateScreen:{
         screen:CampaignDonateScreen
     },
+    PaymentProceed:{
+        screen: PaymentProceed
+    }
 },{
     headerMode:'none',
     navigationOptions:{
